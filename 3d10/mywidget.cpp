@@ -2,6 +2,7 @@
 #include "ui_mywidget.h"
 #include <QDebug>
 #include <QCompleter>
+#include <QRegExpValidator>
 
 MyWidget::MyWidget(QWidget *parent) :
     QWidget(parent),
