@@ -4,4 +4,4 @@ SOURCES += \
     main.cpp
 
 FORMS += \
-    dialog.ui
+    hellodialog.ui
