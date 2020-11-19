@@ -17,13 +17,13 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>120</y>
-     <width>171</width>
+     <y>130</y>
+     <width>181</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>Hello World! 你好 Qt！</string>
+    <string>Hello World! 你好Qt！</string>
    </property>
   </widget>
  </widget>

@@ -1,4 +1,6 @@
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += widgets
+FORMS += \
+    hellodialog.ui
 
 HEADERS += \
     hellodialog.h
@@ -6,6 +8,3 @@ HEADERS += \
 SOURCES += \
     hellodialog.cpp \
     main.cpp
-
-FORMS += \
-    hellodialog.ui
