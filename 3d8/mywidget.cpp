@@ -26,9 +26,9 @@ MyWidget::MyWidget(QWidget *parent) :
     QString str = ui->label->fontMetrics().elidedText(string, Qt::ElideRight, 180);
     ui->label->setText(str);
 
-    ui->label->setPixmap(QPixmap("E:/logo.png"));
+    ui->label->setPixmap(QPixmap("../logo.png"));
 
-    QMovie *movie = new QMovie("E:/donghua.gif");
+    QMovie *movie = new QMovie("../donghua.gif");
     ui->label->setMovie(movie);                  // 在标签中添加动画
     movie->start();
 
