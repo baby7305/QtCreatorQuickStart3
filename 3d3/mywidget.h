@@ -19,7 +19,7 @@ private:
     Ui::MyWidget *ui;
 
 public slots:
-    void showChildDialog();
+    void on_showChildButton_clicked();
 
 };
 

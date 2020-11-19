@@ -7,8 +7,6 @@ MyWidget::MyWidget(QWidget *parent) :
     ui(new Ui::MyWidget)
 {
     ui->setupUi(this);
-    connect(ui->showChildButton, &QPushButton::clicked,
-            this, &MyWidget::showChildDialog);
 }
 
 MyWidget::~MyWidget()
@@ -16,7 +14,7 @@ MyWidget::~MyWidget()
     delete ui;
 }
 
-void MyWidget::showChildDialog()
+void MyWidget::on_showChildButton_clicked()
 {
     QDialog *dialog = new QDialog(this);
     dialog->show();
