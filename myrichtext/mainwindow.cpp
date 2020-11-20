@@ -2,6 +2,10 @@
 #include "ui_mainwindow.h"
 #include <QTextFrame>
 #include <QDebug>
+#include <QLineEdit>
+#include <QDialog>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -47,6 +51,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addAction(action_textTable);
     ui->mainToolBar->addAction(action_textList);
     ui->mainToolBar->addAction(action_textImage);
+
+    QAction *action_textFind = new QAction(tr("查找"), this);
+    connect(action_textFind, &QAction::triggered, this, &MainWindow::textFind);
+    ui->mainToolBar->addAction(action_textFind);
+
+    findDialog = new QDialog(this);         // 创建对话框
+    lineEdit = new QLineEdit(findDialog);            // 创建行编辑器
+    QPushButton *btn = new QPushButton(findDialog);  // 创建按钮
+    btn->setText(tr("查找下一个"));
+    connect(btn, &QPushButton::clicked, this, &MainWindow::findNext); // 关联信号和槽
+    QVBoxLayout *layout = new QVBoxLayout;    // 创建垂直布局管理器
+    layout->addWidget(lineEdit);              // 添加部件
+    layout->addWidget(btn);
+    findDialog->setLayout(layout);                   // 在对话框中使用布局管理器
 }
 
 MainWindow::~MainWindow()
@@ -121,6 +139,21 @@ void MainWindow::insertImage()        // 插入图片
     ui->textEdit->textCursor().insertImage(format);
 }
 
+void MainWindow::textFind()                   // 查找文本
+{
+    findDialog->show();
+}
+void MainWindow::findNext()     // 查找下一个
+{
+    QString string = lineEdit->text();
+    // 使用查找函数查找指定字符串，查找方式为向后查找
+    bool isfind = ui->textEdit->find(string, QTextDocument::FindBackward);
+    if(isfind){                // 如果查找成功，输出字符串所在行和列的编号
+        qDebug() << tr("行号:%1 列号:%2")
+                    .arg(ui->textEdit->textCursor().blockNumber())
+                    .arg(ui->textEdit->textCursor().columnNumber());
+    }
+}
 
 
 

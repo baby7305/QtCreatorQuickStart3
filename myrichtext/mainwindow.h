@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+class QLineEdit;
+class QDialog;
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QLineEdit *lineEdit;
+    QDialog *findDialog;
 
 private slots:
     void showTextFrame();            // 遍历文档框架
@@ -26,6 +30,10 @@ private slots:
     void insertTable();              // 插入表格
     void insertList();               // 插入列表
     void insertImage();              // 插入图片
+
+    void textFind();             // 查找文本
+    void findNext();             // 查找下一个
+
 
 };
 
