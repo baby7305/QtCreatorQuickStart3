@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>60</y>
+     <x>60</x>
+     <y>50</y>
      <width>54</width>
      <height>12</height>
     </rect>
@@ -29,8 +29,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>110</y>
+     <x>60</x>
+     <y>100</y>
      <width>54</width>
      <height>12</height>
     </rect>
@@ -39,25 +39,38 @@
     <string>端口：</string>
    </property>
   </widget>
-  <widget class="QLabel" name="messageLabel">
+  <widget class="QLabel" name="clientStatusLabel">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>180</y>
-     <width>141</width>
-     <height>16</height>
+     <x>70</x>
+     <y>175</y>
+     <width>271</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>接收到的信息</string>
+    <string>状态：等待打开文件！</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="clientProgressBar">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>140</y>
+     <width>291</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>0</number>
    </property>
   </widget>
   <widget class="QLineEdit" name="hostLineEdit">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>55</y>
-     <width>201</width>
+     <x>130</x>
+     <y>45</y>
+     <width>181</width>
      <height>20</height>
     </rect>
    </property>
@@ -65,24 +78,37 @@
   <widget class="QLineEdit" name="portLineEdit">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>105</y>
-     <width>201</width>
+     <x>130</x>
+     <y>95</y>
+     <width>181</width>
      <height>20</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="connectButton">
+  <widget class="QPushButton" name="openButton">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>230</y>
+     <x>70</x>
+     <y>240</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>连  接</string>
+    <string>打  开</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sendButton">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>240</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>发  送</string>
    </property>
   </widget>
  </widget>
