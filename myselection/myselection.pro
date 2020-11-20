@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    spinboxdelegate.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    spinboxdelegate.h
 
 FORMS    += mainwindow.ui

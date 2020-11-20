@@ -3,6 +3,7 @@
 #include <QStandardItemModel>
 #include <QTableView>
 #include <QDebug>
+#include "spinboxdelegate.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -49,6 +50,9 @@ MainWindow::MainWindow(QWidget *parent) :
     tableView2->setModel(model);
     tableView2->setSelectionModel(selectionModel);
     tableView2->show();
+
+    SpinBoxDelegate *delegate = new SpinBoxDelegate(this);
+    tableView->setItemDelegate(delegate);
 
 }
 
