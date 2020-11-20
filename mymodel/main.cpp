@@ -22,5 +22,10 @@ int main(int argc, char *argv[])
     model.insertRows(3, 2);
     model.removeRows(0, 1);
 
+    listView.setSelectionMode(QAbstractItemView::ExtendedSelection);
+    listView.setDragEnabled(true);
+    listView.setAcceptDrops(true);
+    listView.setDropIndicatorShown(true);
+
     return app.exec();
 }
