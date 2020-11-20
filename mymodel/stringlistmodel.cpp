@@ -13,7 +13,7 @@ QVariant StringListModel::data(const QModelIndex &index, int role) const
     if (index.row() >= stringList.size())
         return QVariant();
 
-    if (role == Qt::DisplayRole)
+    if (role == Qt::DisplayRole || role == Qt::EditRole)
         return stringList.at(index.row());
     else
         return QVariant();
@@ -29,4 +29,22 @@ QVariant StringListModel::headerData(int section, Qt::Orientation orientation,
         return QString("Column %1").arg(section);
     else
         return QString("Row %1").arg(section);
+}
+
+Qt::ItemFlags StringListModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return Qt::ItemIsEnabled;
+    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+}
+
+bool StringListModel::setData(const QModelIndex &index,
+                              const QVariant &value, int role)
+{
+    if (index.isValid() && role == Qt::EditRole) {
+        stringList.replace(index.row(), value.toString());
+        emit dataChanged(index, index);
+        return true;
+    }
+    return false;
 }
