@@ -17,6 +17,10 @@ public:
 
 private:
     Ui::Widget *ui;
+    bool keyUp;           // 向上方向键按下的标志
+    bool keyLeft;         // 向左方向键按下的标志
+    bool move;            // 是否完成了一次移动
+
 
 protected:
     void keyPressEvent(QKeyEvent *event);
