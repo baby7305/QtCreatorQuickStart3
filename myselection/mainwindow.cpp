@@ -37,11 +37,25 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->mainToolBar->addAction(tr("当前项目"), this, &MainWindow::getCurrentItemData);
     ui->mainToolBar->addAction(tr("切换选择"), this, &MainWindow::toggleSelection);
+
+    connect(selectionModel, &QItemSelectionModel::selectionChanged,
+            this, &MainWindow::updateSelection);
+    connect(selectionModel, &QItemSelectionModel::currentChanged,
+            this, &MainWindow::changeCurrent);
+
+    tableView2 = new QTableView;
+    tableView2->setWindowTitle("tableView2");
+    tableView2->resize(400, 300);
+    tableView2->setModel(model);
+    tableView2->setSelectionModel(selectionModel);
+    tableView2->show();
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete tableView2;
 }
 
 // 输出当前项目的内容
@@ -60,5 +74,34 @@ void MainWindow::toggleSelection()
     QItemSelection curSelection(topLeft, bottomRight);
     tableView->selectionModel()->select(curSelection,
                                         QItemSelectionModel::Toggle);
+}
+
+// 更新选择
+void MainWindow::updateSelection(const QItemSelection &selected,
+                                 const QItemSelection &deselected)
+{
+    QModelIndex index;
+    QModelIndexList list = selected.indexes();
+
+    // 为现在选择的项目填充值
+    foreach (index, list) {
+        QString text = QString("(%1,%2)").arg(index.row()).arg(index.column());
+        tableView->model()->setData(index, text);
+    }
+    list = deselected.indexes();
+
+    // 清空上一次选择的项目的内容
+    foreach (index, list) {
+        tableView->model()->setData(index, "");
+    }
+}
+
+// 改变当前项目
+void MainWindow::changeCurrent(const QModelIndex &current,
+                               const QModelIndex &previous)
+{
+    qDebug() << tr("move(%1,%2) to (%3,%4)")
+                .arg(previous.row()).arg(previous.column())
+                .arg(current.row()).arg(current.column());
 }
 

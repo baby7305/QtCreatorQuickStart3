@@ -7,6 +7,8 @@ namespace Ui {
 class MainWindow;
 }
 class QTableView;
+class QItemSelection;
+class QModelIndex;
 
 class MainWindow : public QMainWindow
 {
@@ -19,10 +21,15 @@ public:
 private:
     Ui::MainWindow *ui;
     QTableView *tableView;
+    QTableView *tableView2;
 
 public slots:
     void getCurrentItemData();
     void toggleSelection();
+    void updateSelection(const QItemSelection &selected,
+                         const QItemSelection &deselected);
+    void changeCurrent(const QModelIndex &current, const QModelIndex &previous);
+
 
 };
 
