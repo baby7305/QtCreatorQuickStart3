@@ -22,6 +22,10 @@ private:
 protected:
     void timerEvent(QTimerEvent *event);
 
+private slots:
+    void timerUpdate();
+
+
 };
 
 #endif // WIDGET_H
