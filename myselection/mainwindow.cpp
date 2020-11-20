@@ -35,9 +35,30 @@ MainWindow::MainWindow(QWidget *parent) :
     // 使用指定的选择模式来选择项目
     selectionModel->select(selection, QItemSelectionModel::Select);
 
+    ui->mainToolBar->addAction(tr("当前项目"), this, &MainWindow::getCurrentItemData);
+    ui->mainToolBar->addAction(tr("切换选择"), this, &MainWindow::toggleSelection);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+// 输出当前项目的内容
+void MainWindow::getCurrentItemData()
+{
+    qDebug() << tr("当前项目的内容：")
+             << tableView->selectionModel()->currentIndex().data().toString();
+}
+// 切换选择的项目
+void MainWindow::toggleSelection()
+{
+    QModelIndex topLeft = tableView->model()->index(0, 0, QModelIndex());
+    QModelIndex bottomRight = tableView->model()->index(
+                tableView->model()->rowCount(QModelIndex())-1,
+                tableView->model()->columnCount(QModelIndex())-1, QModelIndex());
+    QItemSelection curSelection(topLeft, bottomRight);
+    tableView->selectionModel()->select(curSelection,
+                                        QItemSelectionModel::Toggle);
+}
+

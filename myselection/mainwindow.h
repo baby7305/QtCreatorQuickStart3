@@ -19,6 +19,11 @@ public:
 private:
     Ui::MainWindow *ui;
     QTableView *tableView;
+
+public slots:
+    void getCurrentItemData();
+    void toggleSelection();
+
 };
 
 #endif // MAINWINDOW_H
