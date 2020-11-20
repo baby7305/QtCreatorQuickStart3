@@ -4,6 +4,8 @@
 #include <QMainWindow>
 class QNetworkReply;
 class QNetworkAccessManager;
+#include <QUrl>
+class QFile;
 
 namespace Ui {
 class MainWindow;
@@ -16,14 +18,21 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void startRequest(QUrl url);
 
 private:
     Ui::MainWindow *ui;
     QNetworkAccessManager *manager;
+    QNetworkReply *reply;
+    QUrl url;
+    QFile *file;
 
 private slots:
-    void replyFinished(QNetworkReply *);
+    void httpFinished();
+    void httpReadyRead();
+    void updateDataReadProgress(qint64, qint64);
 
+    void on_pushButton_clicked();
 };
 
 #endif // MAINWINDOW_H

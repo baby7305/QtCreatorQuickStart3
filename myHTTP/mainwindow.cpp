@@ -9,9 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     manager = new QNetworkAccessManager(this);
-    connect(manager, &QNetworkAccessManager::finished,
-            this, &MainWindow::replyFinished);
-    manager->get(QNetworkRequest(QUrl("http://www.qter.org")));
+    ui->progressBar->hide();
 }
 
 MainWindow::~MainWindow()
@@ -19,9 +17,52 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::replyFinished(QNetworkReply *reply)
+void MainWindow::startRequest(QUrl url)
 {
-    QString all = reply->readAll();
-    ui->textBrowser->setText(all);
+    reply = manager->get(QNetworkRequest(url));
+    connect(reply, &QNetworkReply::readyRead, this, &MainWindow::httpReadyRead);
+    connect(reply, &QNetworkReply::downloadProgress,
+            this, &MainWindow::updateDataReadProgress);
+    connect(reply, &QNetworkReply::finished, this, &MainWindow::httpFinished);
+}
+
+void MainWindow::httpReadyRead()
+{
+    if (file) file->write(reply->readAll());
+}
+
+void MainWindow::updateDataReadProgress(qint64 bytesRead, qint64 totalBytes)
+{
+    ui->progressBar->setMaximum(totalBytes);
+    ui->progressBar->setValue(bytesRead);
+}
+
+void MainWindow::httpFinished()
+{
+    ui->progressBar->hide();
+    if(file) {
+        file->close();
+        delete file;
+        file = 0;
+    }
     reply->deleteLater();
+    reply = 0;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    url = ui->lineEdit->text();
+    QFileInfo info(url.path());
+    QString fileName(info.fileName());
+    if (fileName.isEmpty()) fileName = "index.html";
+    file = new QFile(fileName);
+    if(!file->open(QIODevice::WriteOnly))
+    {
+        delete file;
+        file = 0;
+        return;
+    }
+    startRequest(url);
+    ui->progressBar->setValue(0);
+    ui->progressBar->show();
 }
