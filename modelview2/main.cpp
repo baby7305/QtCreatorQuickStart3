@@ -59,6 +59,17 @@ int main(int argc, char *argv[])
     tableWidget.setHorizontalHeaderItem(0, headerH);
     tableWidget.show();
 
+    // 设置选择模式为单选
+    listWidget.setSelectionMode(QAbstractItemView::SingleSelection);
+    // 启用拖动
+    listWidget.setDragEnabled(true);
+    // 设置接受拖放
+    listWidget.viewport()->setAcceptDrops(true);
+    // 设置显示将要被放置的位置
+    listWidget.setDropIndicatorShown(true);
+    // 设置拖放模式为移动项目，如果不设置，默认为复制项目
+    listWidget.setDragDropMode(QAbstractItemView::InternalMove);
+
 
     return app.exec();
 }
