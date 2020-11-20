@@ -48,3 +48,25 @@ bool StringListModel::setData(const QModelIndex &index,
     }
     return false;
 }
+
+bool StringListModel::insertRows(int position, int rows,
+                                 const QModelIndex &parent)
+{
+    beginInsertRows(QModelIndex(), position, position+rows-1);
+    for (int row = 0; row < rows; ++row) {
+        stringList.insert(position, "");
+    }
+    endInsertRows();
+    return true;
+}
+
+bool StringListModel::removeRows(int position, int rows,
+                                 const QModelIndex &parent)
+{
+    beginRemoveRows(QModelIndex(), position, position+rows-1);
+    for (int row = 0; row < rows; ++row) {
+        stringList.removeAt(position);
+    }
+    endRemoveRows();
+    return true;
+}

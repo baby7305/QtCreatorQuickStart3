@@ -19,5 +19,8 @@ int main(int argc, char *argv[])
     tableView.setModel(&model);
     tableView.show();
 
+    model.insertRows(3, 2);
+    model.removeRows(0, 1);
+
     return app.exec();
 }
