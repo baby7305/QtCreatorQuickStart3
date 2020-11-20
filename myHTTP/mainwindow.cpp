@@ -51,7 +51,14 @@ void MainWindow::httpFinished()
 
 void MainWindow::on_pushButton_clicked()
 {
-    url = ui->lineEdit->text();
+    //   url = ui->lineEdit->text();
+    QUrl url;
+    url.setScheme("ftp");
+    url.setHost("v0.ftp.upyun.com");
+    url.setPath("readme.txt");
+    url.setUserName("qtertest/qtftptest");
+    url.setPassword("pwd123456");
+
     QFileInfo info(url.path());
     QString fileName(info.fileName());
     if (fileName.isEmpty()) fileName = "index.html";
