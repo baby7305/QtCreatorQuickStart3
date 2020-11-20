@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include <QDebug>
+#include <QRegularExpression>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
