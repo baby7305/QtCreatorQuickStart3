@@ -23,6 +23,10 @@ private slots:
     void showTextBlock();            // 遍历所有文本块
     void setTextFont(bool checked);  // 设置字体格式
 
+    void insertTable();              // 插入表格
+    void insertList();               // 插入列表
+    void insertImage();              // 插入图片
+
 };
 
 #endif // MAINWINDOW_H

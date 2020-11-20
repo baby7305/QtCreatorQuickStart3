@@ -31,12 +31,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QAction *action_textBlock = new QAction(tr("文本块"), this);
     connect(action_textBlock, &QAction::triggered, this, &MainWindow::showTextBlock);
-//    ui->mainToolBar->addAction(action_textBlock);
+    ui->mainToolBar->addAction(action_textBlock);
 
     QAction *action_font = new QAction(tr("字体"), this);
     action_font->setCheckable(true);                   // 设置动作可以被选中
     connect(action_font, &QAction::toggled, this, &MainWindow::setTextFont);
-//    ui->mainToolBar->addAction(action_font);
+    ui->mainToolBar->addAction(action_font);
+
+    QAction *action_textTable = new QAction(tr("表格"),this);
+    QAction *action_textList = new QAction(tr("列表"),this);
+    QAction *action_textImage = new QAction(tr("图片"),this);
+    connect(action_textTable, &QAction::triggered, this, &MainWindow::insertTable);
+    connect(action_textList, &QAction::triggered, this, &MainWindow::insertList);
+    connect(action_textImage, &QAction::triggered, this, &MainWindow::insertImage);
+    ui->mainToolBar->addAction(action_textTable);
+    ui->mainToolBar->addAction(action_textList);
+    ui->mainToolBar->addAction(action_textImage);
 }
 
 MainWindow::~MainWindow()
@@ -89,6 +99,28 @@ void MainWindow::setTextFont(bool checked)         // 设置字体格式
     }
     else{/*恢复默认的字体格式*/}        // 如果处于非选中状态，可以进行其他操作
 }
+
+void MainWindow::insertTable()        // 插入表格
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextTableFormat format;          // 表格格式
+    format.setCellSpacing(2);         // 表格外边白
+    format.setCellPadding(10);        // 表格内边白
+    cursor.insertTable(2, 2, format); // 插入2行2列表格
+}
+void MainWindow::insertList()         // 插入列表
+{
+    QTextListFormat format;           // 列表格式
+    format.setStyle(QTextListFormat::ListDecimal);   // 数字编号
+    ui->textEdit->textCursor().insertList(format);
+}
+void MainWindow::insertImage()        // 插入图片
+{
+    QTextImageFormat format;          // 图片格式
+    format.setName("../myrichtext/logo.png");       // 图片路径
+    ui->textEdit->textCursor().insertImage(format);
+}
+
 
 
 
