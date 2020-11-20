@@ -6,6 +6,7 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include "mysyntaxhighlighter.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -65,6 +66,10 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addWidget(lineEdit);              // 添加部件
     layout->addWidget(btn);
     findDialog->setLayout(layout);                   // 在对话框中使用布局管理器
+
+    highlighter = new MySyntaxHighlighter(ui->textEdit->document());
+
+    ui->textEdit->append(tr("<h1><font color=red>使用HTML</font></h1>"));
 }
 
 MainWindow::~MainWindow()

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 class QLineEdit;
 class QDialog;
+class MySyntaxHighlighter;
 
 namespace Ui {
 class MainWindow;
@@ -21,6 +22,7 @@ private:
     Ui::MainWindow *ui;
     QLineEdit *lineEdit;
     QDialog *findDialog;
+    MySyntaxHighlighter *highlighter;
 
 private slots:
     void showTextFrame();            // 遍历文档框架
